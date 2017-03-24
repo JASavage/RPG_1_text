@@ -90,8 +90,8 @@ class Vampire(Enemy):
 class Lost_Miner(Character):
     def __init__(self, player):
         Enemy.__init__(self)
-        self.name = 'a lost miner."
-        self.description = "Does not seem native to the labyrinth, he may have come across an opening while mining.
+        self.name = "a lost miner."
+        self.description = "Does not seem native to the labyrinth, he may have come across an opening while mining."
         self.health = 10
 
 class Player(Character):
