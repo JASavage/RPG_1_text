@@ -4,7 +4,7 @@ import time
 print """You are running as fast as possible, away from something, but you can't remember what.
 You see a door, as you approach, it speaks. "Warning, opening this door means you are entering the Labyrinth Dimension.
 You will never leave or die. There is only one exit." You don't care. As you are about to open the door someone stops you.
-He gives you a book. This book has a map of all explored areas of the Labyrinth. As the next one to enter you are expected to comtinue this tradition.
+He gives you a book. This book has a map of all explored areas of the Labyrinth. As the next one to enter you are expected to continue this tradition.
 When you eventually give up, and when you do this book will duplicate and leave you."""
 class Character:
     def __init__ (self):
