@@ -87,12 +87,12 @@ class Vampire(Enemy):
         self.health = 9
         sel.heatlh_regen = float(1.5)
 
-class Lost_Miner(Character):
-    def __init__(self, player):
-        Enemy.__init__(self)
-        self.name = "a lost miner."
-        self.description = "Does not seem native to the labyrinth, he may have come across an opening while mining."
-        self.health = 10
+#class Lost_Miner(Character):
+ #   def __init__(self, player):
+ #       Enemy.__init__(self)
+  #      self.name = "a lost miner."
+  #      self.description = "Does not seem native to the labyrinth, he may have come across an opening while mining."
+   #     self.health = 10
 
 class Player(Character):
     def __init__(self):
@@ -108,5 +108,22 @@ class Player(Character):
     def stats(self):
         print "Health: %d/%d" % (self.health, self.health_max)
         print "Health regen: %d"
-    def interact(self, Character):
+    #def interact(self, Character):
+    def explore(self):
+        vampire_chance = 2
+        goblin_chance = 5
+        orc_chance = 7
+        encounter = randint(1,10)
+        if encounter = vampire_chance:
+            self.vampire = Vampire(self)
+            print "You encounter a Vampire"
+        elif encounter = goblin_chance:
+            self.goblin = Goblin(self)
+            print "You encounter a Goblin"
+        elif encounter = orc_chance:
+            self.orc = Orc(self)
+            print "You encounter an Orc"
+        else:
+            print "You walk into a different area, but it pretty much looks the same. You may even be walking in circles."
+    def flee(self):      
         
