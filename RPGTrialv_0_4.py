@@ -126,4 +126,12 @@ class Player(Character):
         else:
             print "You walk into a different area, but it pretty much looks the same. You may even be walking in circles."
     def flee(self):      
-        
+        if self.damage <= enemy.damage and self.health <= enemy.health:
+            self.enemy = None
+            print "You have successfully ditched the enemy."
+        else:
+            print "Fleeing is not allowed especially since you can win."
+    def attack(self):
+        if self.enemy == None:
+            print "Now why would fight something that isn't even there."
+        else:
