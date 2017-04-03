@@ -1,16 +1,41 @@
-def level_up:
-  add_damage_chance = 4
-  add_health_chance = 8
-  add_healthregen_chance = 2
-  add_defense_chance = 6
-  add_test_1 = randint(1,10)
-  add_test_2 = randint(1,10)
-  Player.__init__
-  lvl_damage_add = int(.05(player.damage))
-  if lvl_damage_add < 1:
-    lvl_damage = 1
-  if add_test_1 <= add_damage_chance:
-    damage += lvl_damage_add
-  else:
-    damage = damage
-  if add_test_1 >= add_defense
+from random import randint
+
+class Item:
+  def __init__(Item):
+    item.damage = 0
+    item.defense = 0
+    item.health_regen = 0
+    item.rarity = 0
+  def increase_damage(Item, rarity):
+    item.damage = item.damage + damage_add
+  def increase_defense(Item, rarity):
+    item.defense = item.defense + defense_add
+  def increase_health_regen(Item, rarity):
+    item.health_regen = item.health_regen + health_regen_add
+    
+class rarity(Item):
+  def __init__(Item):
+    
+    if player_level < 10:
+      item.rarity = randint(1, 10)
+      
+    elif player_level > 10 and player_level < 25:
+      item.rarity = randint(11, 25)
+      
+    elif player_level > 25 and player_level < 50:
+      item.rarity = randint(26, 50)
+      
+    elif player_level > 50 and player_level < 75:
+      item.rarity = randint(51, 75)
+      
+    elif player_level > 75 and player_level < 100:
+      item.rarity = randint(76, 100)
+    
+  def rarity_add(Item):
+    
+    damage_add = item.rarity
+    defense_add = item.rarity
+    
+  
+  
+    
