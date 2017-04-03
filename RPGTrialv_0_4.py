@@ -85,7 +85,7 @@ class Vampire(Enemy):
         Enemy.__init__(self)
         self.name = 'a vampire'
         self.health = 9
-        sel.heatlh_regen = float(1.5)
+        self.heatlh_regen = float(1.5)
 
 #class Lost_Miner(Character):
  #   def __init__(self, player):
