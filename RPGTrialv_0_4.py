@@ -39,33 +39,19 @@ class Character:
 class Enemy(Character):
     def __init__ (self):
         self.name = ""
-        self.health = 1
-        self.health_max = 1
-        self.health_regen = float(0)
-    def do_damage(self, enemy):
-        damage = 1
-        damage_add = 0
-        damage_multi = float(1)
-        crit_chance = randint(1, 1000)
-        crit_capnull = 150
-        crit_capup = 950
-        crit_multi = float(3)
-        if crit_chance <= crit_capnull:
-            damage = 0
-        elif crit_chance > crit and crit_chance < crit_capup:
-            damage = int((damage + damage_add) * damage_multi)
-        elif crit_chance >= crit_capup:
-            damage = int(((damage + damage_add) * damage_multi) * crit_multi)
-        print "%s does %d damage to the enemy." % (self.name, damage)
-        return enemy.health <= 0
-    def regen_health(self, enemy):
-        seconds = 0
-        while self.health < self.health_max:
-            time_elapsed = time.clock()
-            if time_elapsed == seconds:
-                seconds = seconds + 1
-                self.health += self.health_regen
-
+        self.health_max = randint(.5(player.health_max, 1.5(player.health))
+        self.health = self.health_max       
+        self.health_regen = 1
+        if self.health_max >= .5(player.health_max) and self.health_max < .75(player.health_max):
+                                  self.health_regen = float(1.5)
+                                  self.name = "a vampire"
+        if self.health_max >= .75(player.health_max) and self.health_max <= player.health_max:
+                                  self.health_regen = float(1)
+                                  self.name = "a goblin"
+        if self.health_max > player.health_max and self.health_max <= 1.5(player.health_max):
+                                  self.health_regen = float(.5)
+                                  self.name = "an orc"
+        
 class Goblin(Enemy):
     def __init__(self, player):
         Enemy.__init__(self)
