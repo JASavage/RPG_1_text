@@ -30,7 +30,7 @@ class Character:
         elif crit_chance >= crit_capup:
             damage = int(((damage + damage_add) * damage_multi) * crit_multi)
         print "%s does %d damage to the enemy." % (self.name, damage)
-        return enemy.health <= 0
+        enemy.health -= damage
     def regen_health(self, enemy):
         seconds = 0
         while self.health < self.health_max:
@@ -55,33 +55,7 @@ class Enemy(Character):
                                   self.health_regen = float(.5)
                                   self.name = "an orc"
         
-class Goblin(Enemy):
-    def __init__(self, player):
-        Enemy.__init__(self)
-        self.name = 'a goblin'
-        self.health = 8
-        self.health_regen = float(.5)
 
-class Orc(Enemy):
-    def __init__(self, player):
-        Enemy.__init__(self)
-        self.name = 'an orc'
-        self.health = 18
-        self.health_regen = float(.25)
-
-class Vampire(Enemy):
-    def __init__(self, player):
-        Enemy.__init__(self)
-        self.name = 'a vampire'
-        self.health = 9
-        self.heatlh_regen = float(1.5)
-
-#class Lost_Miner(Character):
-#    def __init__(self, player):
-#        Enemy.__init__(self)
-#        self.name = "a lost miner."
-#        self.description = "Does not seem native to the labyrinth, he may have come across an opening while mining."
-#        self.health = 10
 
 class Player(Character):
     def __init__(self):
@@ -97,21 +71,11 @@ class Player(Character):
     def stats(self):
         print "Health: %d/%d" % (self.health, self.health_max)
         print "Health regen: %d"
-    #def interact(self, Character):
+    
     def explore(self):
-        vampire_chance = 2
-        goblin_chance = 5
-        orc_chance = 7
-        encounter = randint(1,10)
-        if encounter = vampire_chance:
-            self.vampire = Vampire(self)
-            print "You encounter a Vampire"
-        elif encounter = goblin_chance:
-            self.goblin = Goblin(self)
-            print "You encounter a Goblin"
-        elif encounter = orc_chance:
-            self.orc = Orc(self)
-            print "You encounter an Orc"
+        encounter = randint(0,20)
+        if encounter >= 5:
+            self.enemy = Enemy(self)                      
         else:
             print "You walk into a different area, but it pretty much looks the same. You may even be walking in circles."
     def flee(self):      
