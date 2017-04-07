@@ -50,25 +50,30 @@ class rarity(Item):
     lvl_defense_add = int(.15(player.defense))
     lvl_regen_add = float(.1)
     lvl_health_add = int(.1(player.health))
-    if lvl_defense_add < 1:
-      lvl_defense_add = 1
-    if lvl_damage_add < 1:
-      lvl_damage_add = 1
-    if add_test_1 <= add_damage_chance:
-      player.damage += lvl_damage_add
-    else:
+    max_EXP_add = 2
+    while trueEXP >= maxExp:
+      if lvl_defense_add < 1:
+        lvl_defense_add = 1
+      if lvl_damage_add < 1:
+        lvl_damage_add = 1
+      if add_test_1 <= add_damage_chance:
+        player.damage += lvl_damage_add
+      else:
         player.damage = player.damage
-    if add_test_2 >= add_defense:
-      player.defense += lvl_damage_add
-    else:
-      player.defense = player.defense
-    if add_test_3 <= add_regen_chance:
-      player.health_regen += lvl_regen_add
-    else:
-      player.health_regen = player.health_regen
-    if add_test_4 >= add_health_chance:
-      player.health += lvl_health_add
-    else:
-      player.health = player.health
+      if add_test_2 >= add_defense:
+        player.defense += lvl_damage_add
+      else:
+        player.defense = player.defense
+      if add_test_3 <= add_regen_chance:
+        player.health_regen += lvl_regen_add
+      else:
+        player.health_regen = player.health_regen
+      if add_test_4 >= add_health_chance:
+        player.health += lvl_health_add
+      else:
+        player.health = player.health
+      trueEXP -= maxEXP
+      maxEXP += max_EXP_add
+      max_EXP_add += 2
   
     
