@@ -27,6 +27,8 @@ class Character:
         elif crit_chance >= crit_capup:
             damage = int(((damage + damage_add) * damage_multi) * crit_multi)
         print "%s does %d damage to the enemy." % (self.name, damage)
+        if enemy.health == 0:
+            trueEXP += 2
         return enemy.health <= 0
     def regen_health(self, enemy):
         seconds = 0
@@ -52,34 +54,6 @@ class Enemy(Character):
                                   self.health_regen = float(.5)
                                   self.name = "an orc"
         
-class Goblin(Enemy):
-    def __init__(self, player):
-        Enemy.__init__(self)
-        self.name = 'a goblin'
-        self.health = 8
-        self.health_regen = float(.5)
-
-class Orc(Enemy):
-    def __init__(self, player):
-        Enemy.__init__(self)
-        self.name = 'an orc'
-        self.health = 18
-        self.health_regen = float(.25)
-
-class Vampire(Enemy):
-    def __init__(self, player):
-        Enemy.__init__(self)
-        self.name = 'a vampire'
-        self.health = 9
-        self.heatlh_regen = float(1.5)
-
-#class Lost_Miner(Character):
- #   def __init__(self, player):
- #       Enemy.__init__(self)
-  #      self.name = "a lost miner."
-  #      self.description = "Does not seem native to the labyrinth, he may have come across an opening while mining."
-   #     self.health = 10
-
 class Player(Character):
     def __init__(self):
         Character.__init__(self)
@@ -93,8 +67,7 @@ class Player(Character):
         print Commands.keys()
     def stats(self):
         print "Health: %d/%d" % (self.health, self.health_max)
-        print "Health regen: %d"
-    #def interact(self, Character):
+        print "Health regen: %d" % self.health_regen
     def explore(self):
         vampire_chance = 2
         goblin_chance = 5
