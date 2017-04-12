@@ -1,11 +1,7 @@
 from random import randint
 import time
 
-print """You are running as fast as possible, away from something, but you can't remember what.
-You see a door, as you approach, it speaks. "Warning, opening this door means you are entering the Labyrinth Dimension.
-You will never leave or die. There is only one exit." You don't care. As you are about to open the door someone stops you.
-He gives you a book. This book has a map of all explored areas of the Labyrinth. As the next one to enter you are expected to continue this tradition.
-When you eventually give up, and when you do this book will duplicate and leave you."""
+
 class Character:
     def __init__ (self):
         self.name = ""
@@ -15,6 +11,8 @@ class Character:
         self.level = 0
         self.trueEXP = 0
         self.maxEXP = 10
+        self.level = 0
+        self.trueEXP_add = 2
     def do_damage(self, enemy):
         damage = 1
         damage_add = 0
@@ -45,6 +43,7 @@ class Enemy(Character):
         self.health_max = randint(.5(player.health_max, 1.5(player.health))
         self.health = self.health_max       
         self.health_regen = 1
+        self.level = player.level
         if self.health_max >= .5(player.health_max) and self.health_max < .75(player.health_max):
                                   self.health_regen = float(1.5)
                                   self.name = "a vampire"
@@ -71,7 +70,6 @@ class Player(Character):
     def stats(self):
         print "Health: %d/%d" % (self.health, self.health_max)
         print "Health regen: %d"
-    
     def explore(self):
         encounter = randint(0,20)
         if encounter >= 5:
@@ -83,8 +81,65 @@ class Player(Character):
             self.enemy = None
             print "You have successfully ditched the enemy."
         else:
-            print "Fleeing is not allowed especially since you can win."
+            print "At least you tried"
     def attack(self):
         if self.enemy == None:
             print "Now why would fight something that isn't even there."
         else:
+            
+    def level_up(self):   
+        add_damage_chance = 4
+        add_health_chance = 6
+        add_regen_chance = 2
+        add_defense_chance = 8
+        add_test_1 = randint(1,10)
+        add_test_2 = randint(1,10)
+        add_test_3 = randint(1,10)
+        add_test_4 = randint(1,10)
+        lvl_damage_add = int(.05(player.damage))
+        lvl_defense_add = int(.15(player.defense))
+        lvl_regen_add = float(.1)
+        lvl_health_add = int(.1(player.health))
+        max_EXP_add = 2
+        if self.trueEXP >= self.maxExp:
+            if lvl_defense_add < 1:
+                lvl_defense_add = 1
+            if lvl_damage_add < 1:
+                lvl_damage_add = 1
+            if add_test_1 <= add_damage_chance:
+                self.damage += lvl_damage_add
+            else:
+                self.damage = self.damage
+            if add_test_2 >= add_defense:
+                self.defense += lvl_damage_add
+            else:
+                self.defense = self.defense
+            if add_test_3 <= add_regen_chance:
+                self.health_regen += lvl_regen_add
+            else:
+                self.health_regen = self.health_regen
+            if add_test_4 >= add_health_chance:
+                self.health += lvl_health_add
+            else:
+                self.health = self.health
+            self.trueEXP -= self.maxEXP
+            self.maxEXP += self.max_EXP_add
+            self.max_EXP_add += 2 
+            self.level += 1
+     def EXP(self):
+           EXP_barrier = 10
+           arbitrary = 2
+           if enemy.health <= 0:
+              while self.level <= EXP_barrier:
+                  self.trueEXP_add = arbitrary
+                  if self.level == EXP_barrier:
+                     EXP_barrier += 10
+                     arbitrary += 1
+              self.true_EXP += self.trueEXP_add
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
