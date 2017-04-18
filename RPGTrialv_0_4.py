@@ -13,22 +13,26 @@ class Character:
         self.maxEXP = 10
         self.level = 0
         self.trueEXP_add = 2
-    def do_damage(self, enemy):
-        damage = 1
-        damage_add = 0
-        damage_multi = float(1)
+        self.damage = 1
+        self.damage_add = 0
+        self.damage_multi = 1
+        self.enemy = None
+    def do_damage(self):
+        self.damage = 1
+        self.damage_add = 0
+        self.damage_multi = 1
         crit_chance = randint(1, 1000)
         crit_capnull = 150
         crit_capup = 950
-        crit_multi = float(3)
+        crit_multi = 3
         if crit_chance <= crit_capnull:
-            damage = 0
+            self.damage = 0
         elif crit_chance > crit and crit_chance < crit_capup:
-            damage = int((damage + damage_add) * damage_multi)
+            self.damage = int((self.damage + self.damage_add) * self.damage_multi)
         elif crit_chance >= crit_capup:
-            damage = int(((damage + damage_add) * damage_multi) * crit_multi)
-        print "%s does %d damage to the enemy." % (self.name, damage)
-        enemy.health -= damage
+            self.damage = int(((self.damage + self.damage_add) * self.damage_multi) * crit_multi)
+        print "%s does %d damage to the enemy." % (self.name, self.damage)
+        self.health -= self.damage
     def regen_health(self, enemy):
         seconds = 0
         while self.health < self.health_max:
@@ -44,6 +48,7 @@ class Enemy(Character):
         self.health = self.health_max       
         self.health_regen = 1
         self.level = player.level
+        self.enemy = player
         if self.health_max >= .5(player.health_max) and self.health_max < .75(player.health_max):
                                   self.health_regen = float(1.5)
                                   self.name = "a vampire"
@@ -53,7 +58,11 @@ class Enemy(Character):
         if self.health_max > player.health_max and self.health_max <= 1.5(player.health_max):
                                   self.health_regen = float(.5)
                                   self.name = "an orc"
-        
+    def attack(self):
+        if self.enemy == None:
+            print "Now why would fight something that isn't even there."
+        else:
+            self.dodamage
 
 
 class Player(Character):
@@ -73,20 +82,16 @@ class Player(Character):
     def explore(self):
         encounter = randint(0,20)
         if encounter >= 5:
-            self.enemy = Enemy(self)                      
+            self.enemy = enemy                      
         else:
             print "You walk into a different area, but it pretty much looks the same. You may even be walking in circles."
-    def flee(self):      
+    def flee(self, enemy):      
         if self.damage <= enemy.damage and self.health <= enemy.health:
             self.enemy = None
             print "You have successfully ditched the enemy."
         else:
             print "At least you tried"
-    def attack(self):
-        if self.enemy == None:
-            print "Now why would fight something that isn't even there."
-        else:
-            
+   
     def level_up(self):   
         add_damage_chance = 4
         add_health_chance = 6
@@ -137,7 +142,32 @@ class Player(Character):
                      arbitrary += 1
               self.true_EXP += self.trueEXP_add
                                   
-                                  
+    Commands = {
+  'quit': player.quit,
+  'help': player.help,
+  'stats': player.stats,
+  'explore': player.explore,
+  'flee': player.flee,
+  'attack': enemy.attack,
+  }
+ 
+p = player()
+p.name = raw_input("What is your character's name? ")
+print "(type help to get a list of actions)\n"
+print "%s enters a dark cave, searching for adventure." % p.name
+ 
+while(p.health > 0):
+  line = raw_input("> ")
+  args = line.split()
+  if len(args) > 0:
+    commandFound = False
+    for c in Commands.keys():
+      if args[0] == c[:len(args[0])]:
+        Commands[c](p)
+        commandFound = True
+        break
+    if not commandFound:
+      print "%s doesn't understand the suggestion." % p.name                              
                                   
                                   
                                   
