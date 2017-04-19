@@ -2,7 +2,7 @@ from random import randint
 import time
 
 
-class Character:
+class character:
     def __init__ (self):
         self.name = ""
         self.health = 1
@@ -41,8 +41,9 @@ class Character:
                 seconds = seconds + 1
                 self.health += self.health_regen
 
-class Enemy(Character):
+class enemy(Character):
     def __init__ (self):
+        character.__init__
         self.name = ""
         self.health_max = randint(.5(player.health_max, 1.5(player.health))
         self.health = self.health_max       
@@ -65,9 +66,9 @@ class Enemy(Character):
             self.dodamage
 
 
-class Player(Character):
+class player(character):
     def __init__(self):
-        Character.__init__(self)
+        character.__init__(self)
         self.health = 10
         self.health_max = 10
         self.health_regen = 1
